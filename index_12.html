@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ESCI">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#B8183A">
+    <meta name="description" content="ESCI - Entreprise Sénégalaise de Construction et d'Industrie. Libasse MBENGUE, Directeur Général.">
+    <title>ESCI - Carte Digitale</title>
+
+    <link rel="icon" type="image/png" href="https://esci-sn.github.io/ESCI/esci/favicon.png">
+    <link rel="apple-touch-icon" href="https://esci-sn.github.io/ESCI/esci/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esci-sn.github.io/ESCI/">
+    <meta property="og:title" content="ESCI - Libasse MBENGUE">
+    <meta property="og:description" content="Directeur Général - Entreprise Sénégalaise de Construction et d'Industrie">
+    <meta property="og:image" content="https://esci-sn.github.io/ESCI/esci/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ESCI">
+    <meta property="og:locale" content="fr_FR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://esci-sn.github.io/ESCI/">
+    <meta name="twitter:title" content="ESCI - Libasse MBENGUE">
+    <meta name="twitter:description" content="Directeur Général - Entreprise Sénégalaise de Construction et d'Industrie">
+    <meta name="twitter:image" content="https://esci-sn.github.io/ESCI/esci/og-image.png">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #0a0a0f;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* === PARTICLES === */
+        .particles-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 860px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .business-card {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 24px;
+            padding: 45px 45px 0 45px;
+            box-shadow:
+                0 0 60px rgba(184, 24, 58, 0.08),
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 45px;
+            align-items: center;
+            min-height: 530px;
+            animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Subtle shimmer overlay on card */
+        .business-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0%,
+                rgba(184, 24, 58, 0.015) 10%,
+                transparent 20%,
+                rgba(29, 29, 27, 0.01) 30%,
+                transparent 40%
+            );
+            animation: shimmerRotate 15s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes shimmerRotate {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(40px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* === HOLOGRAPHIC LOGO === */
+        .logo-container {
+            position: relative;
+            padding: 15px;
+        }
+
+        .logo-container img {
+            width: 220px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15));
+            animation: logoFloat 5s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-holo-overlay {
+            position: absolute;
+            top: 15px; left: 15px;
+            width: 220px;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(184, 24, 58, 0) 0%,
+                rgba(184, 24, 58, 0.15) 25%,
+                rgba(255, 255, 255, 0.25) 50%,
+                rgba(29, 29, 27, 0.1) 75%,
+                rgba(184, 24, 58, 0) 100%
+            );
+            background-size: 200% 200%;
+            animation: holoShift 4s ease-in-out infinite, logoFloat 5s ease-in-out infinite;
+            mix-blend-mode: overlay;
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @keyframes holoShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* === QR CODE WITH LASER === */
+        .qr-wrapper {
+            position: relative;
+        }
+
+        .qr-code {
+            width: 165px; height: 165px; padding: 10px;
+            background: white; border-radius: 14px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(184, 24, 58, 0.08);
+            position: relative;
+            z-index: 1;
+        }
+
+        .qr-laser {
+            position: absolute;
+            top: 10px; left: 10px; right: 10px;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(184, 24, 58, 0.3) 20%,
+                #B8183A 50%,
+                rgba(184, 24, 58, 0.3) 80%,
+                transparent 100%
+            );
+            box-shadow: 0 0 10px rgba(184, 24, 58, 0.5), 0 0 30px rgba(184, 24, 58, 0.2);
+            z-index: 2;
+            animation: laserScan 3s ease-in-out infinite;
+            border-radius: 2px;
+        }
+
+        @keyframes laserScan {
+            0%, 100% { top: 10px; opacity: 0; }
+            5% { opacity: 1; }
+            45% { top: 155px; opacity: 1; }
+            50% { top: 155px; opacity: 0; }
+            55% { top: 155px; opacity: 1; }
+            95% { top: 10px; opacity: 1; }
+            100% { top: 10px; opacity: 0; }
+        }
+
+        .scan-text {
+            font-size: 10px; color: #B8183A;
+            text-transform: uppercase; letter-spacing: 3px;
+            font-weight: 600; text-align: center;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        /* === RIGHT SECTION === */
+        .right-section {
+            display: flex; flex-direction: column;
+            justify-content: center; gap: 12px;
+            padding-bottom: 40px;
+            position: relative; z-index: 1;
+        }
+
+        .company-full-name {
+            font-size: 16px; font-weight: 700;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1.5px; line-height: 1.4;
+        }
+
+        .company-acronym {
+            font-size: 48px; font-weight: 900;
+            color: #1D1D1B; letter-spacing: 8px;
+            line-height: 1;
+            position: relative;
+        }
+
+        /* Subtle red underline accent on ESCI */
+        .company-acronym::after {
+            content: '';
+            display: block;
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, #B8183A, transparent);
+            margin-top: 6px;
+            border-radius: 2px;
+        }
+
+        .divider {
+            width: 120px; height: 1px;
+            background: linear-gradient(90deg, #B8183A, #ccc, transparent);
+            margin: 8px 0;
+        }
+
+        .person-name {
+            font-size: 26px; font-weight: 700;
+            color: #B8183A; margin-top: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .person-title {
+            font-size: 14px; color: #666;
+            font-weight: 500; letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .share-button {
+            width: 100%; max-width: 260px; padding: 14px 20px;
+            background: linear-gradient(135deg, #B8183A, #8B1030);
+            color: white; border: none; border-radius: 14px;
+            font-size: 13px; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            box-shadow: 0 4px 20px rgba(184, 24, 58, 0.3);
+            transition: all 0.3s ease; margin-top: 10px;
+            text-transform: uppercase; letter-spacing: 1px;
+            position: relative; overflow: hidden;
+        }
+
+        .share-button::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 40%,
+                rgba(255, 255, 255, 0.15) 50%,
+                transparent 60%
+            );
+            animation: btnShine 4s ease-in-out infinite;
+        }
+
+        @keyframes btnShine {
+            0%, 100% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(184, 24, 58, 0.5);
+        }
+
+        /* === BOTTOM BAR === */
+        .accent-bar {
+            grid-column: 1 / -1; height: 6px;
+            border-radius: 0 0 24px 24px;
+            background: linear-gradient(90deg,
+                #B8183A 0%, #B8183A 35%,
+                #d4445a 35%, #d4445a 38%,
+                #1D1D1B 38%, #1D1D1B 100%
+            );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accent-bar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: barShine 5s ease-in-out infinite;
+        }
+
+        @keyframes barShine {
+            0%, 100% { left: -100%; }
+            50% { left: 150%; }
+        }
+
+        .success-message {
+            position: fixed; top: 20px; left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: linear-gradient(135deg, #B8183A, #8B1030);
+            color: white; padding: 15px 30px; border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(184, 24, 58, 0.5);
+            font-weight: 600; opacity: 0; transition: all 0.5s ease; z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .success-message.show {
+            transform: translateX(-50%) translateY(0); opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .business-card { grid-template-columns: 1fr; gap: 24px; padding: 30px 24px 0 24px; }
+            .left-section { padding-bottom: 0; }
+            .right-section { padding-bottom: 24px; }
+            .logo-container img, .logo-holo-overlay { width: 180px; }
+            .qr-code { width: 155px; height: 155px; }
+            .company-full-name { font-size: 14px; }
+            .company-acronym { font-size: 40px; }
+            .person-name { font-size: 22px; }
+            .share-button { max-width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .business-card { padding: 24px 18px 0 18px; }
+            .logo-container img, .logo-holo-overlay { width: 160px; }
+            .company-full-name { font-size: 12px; }
+            .company-acronym { font-size: 34px; letter-spacing: 5px; }
+            .person-name { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="particles-canvas" id="particles"></canvas>
+
+    <div class="container">
+        <div class="business-card">
+            <div class="left-section">
+                <div class="logo-container">
+                    <img src="esci/logo-esci-transparent.png" alt="ESCI">
+                    <div class="logo-holo-overlay"></div>
+                </div>
+                <div class="qr-wrapper">
+                    <div class="qr-code" id="qrcode"></div>
+                    <div class="qr-laser"></div>
+                </div>
+                <p class="scan-text">Scanne-moi</p>
+            </div>
+
+            <div class="right-section">
+                <div>
+                    <p class="company-full-name">Entreprise Sénégalaise<br>de Construction et d'Industrie</p>
+                    <p class="company-acronym">ESCI</p>
+                    <div class="divider"></div>
+                </div>
+                <div>
+                    <h2 class="person-name">Libasse MBENGUE</h2>
+                    <p class="person-title">Directeur Général</p>
+                </div>
+                <button class="share-button" onclick="shareCard()">
+                    <span>🔗</span>
+                    <span>Partager la Carte</span>
+                </button>
+            </div>
+
+            <div class="accent-bar"></div>
+        </div>
+    </div>
+
+    <div class="success-message" id="successMessage">Lien copié dans le presse-papiers!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // === PARTICLES ===
+        (function() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const PARTICLE_COUNT = 50;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.3;
+                    this.vy = (Math.random() - 0.5) * 0.3;
+                    this.radius = Math.random() * 2 + 0.5;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                    // Mix of red and white particles
+                    this.isRed = Math.random() > 0.6;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    if (this.isRed) {
+                        ctx.fillStyle = `rgba(184, 24, 58, ${this.opacity})`;
+                    } else {
+                        ctx.fillStyle = `rgba(200, 200, 210, ${this.opacity * 0.6})`;
+                    }
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(new Particle());
+            }
+
+            function drawLines() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(184, 24, 58, ${0.05 * (1 - dist / 120)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                drawLines();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // === QR CODE ===
+        const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, '');
+        const scanUrl = baseUrl + 'scan.html';
+
+        new QRCode(document.getElementById("qrcode"), {
+            text: scanUrl, width: 145, height: 145,
+            colorDark: "#1D1D1B", colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        function shareCard() {
+            const shareData = {
+                title: 'ESCI - Libasse MBENGUE',
+                text: 'Libasse MBENGUE - Directeur Général - Entreprise Sénégalaise de Construction et d\'Industrie',
+                url: scanUrl
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch(() => copyToClipboard());
+            } else { copyToClipboard(); }
+        }
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(scanUrl).then(() => showSuccess());
+        }
+
+        function showSuccess() {
+            const msg = document.getElementById('successMessage');
+            msg.classList.add('show');
+            setTimeout(() => msg.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
