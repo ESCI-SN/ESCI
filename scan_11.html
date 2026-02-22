@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ESCI">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#B8183A">
+    <meta name="description" content="Libasse MBENGUE - Directeur Général - ESCI">
+    <title>Libasse MBENGUE - ESCI</title>
+
+    <link rel="icon" type="image/png" href="https://esci-sn.github.io/ESCI/esci/favicon.png">
+    <link rel="apple-touch-icon" href="https://esci-sn.github.io/ESCI/esci/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esci-sn.github.io/ESCI/scan.html">
+    <meta property="og:title" content="Libasse MBENGUE - ESCI">
+    <meta property="og:description" content="Directeur Général - Entreprise Sénégalaise de Construction et d'Industrie | +221 77 639 79 28">
+    <meta property="og:image" content="https://esci-sn.github.io/ESCI/esci/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ESCI">
+    <meta property="og:locale" content="fr_FR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://esci-sn.github.io/ESCI/scan.html">
+    <meta name="twitter:title" content="Libasse MBENGUE - ESCI">
+    <meta name="twitter:description" content="Directeur Général - Entreprise Sénégalaise de Construction et d'Industrie">
+    <meta name="twitter:image" content="https://esci-sn.github.io/ESCI/esci/og-image.png">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #0a0a0f;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+
+        .particles-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 22px;
+            padding: 28px 28px 0 28px;
+            box-shadow:
+                0 0 60px rgba(184, 24, 58, 0.08),
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0%,
+                rgba(184, 24, 58, 0.015) 10%,
+                transparent 20%,
+                rgba(29, 29, 27, 0.01) 30%,
+                transparent 40%
+            );
+            animation: shimmerRotate 15s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes shimmerRotate { to { transform: rotate(360deg); } }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(40px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* === HOLOGRAPHIC LOGO === */
+        .logo-container {
+            display: inline-block;
+            padding: 10px;
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .logo-container img {
+            width: 155px; height: auto; display: block;
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15));
+            animation: logoFloat 5s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-holo-overlay {
+            position: absolute;
+            top: 10px; left: 50%;
+            transform: translateX(-50%);
+            width: 155px;
+            height: calc(100% - 20px);
+            background: linear-gradient(
+                135deg,
+                rgba(184, 24, 58, 0) 0%,
+                rgba(184, 24, 58, 0.15) 25%,
+                rgba(255, 255, 255, 0.25) 50%,
+                rgba(29, 29, 27, 0.1) 75%,
+                rgba(184, 24, 58, 0) 100%
+            );
+            background-size: 200% 200%;
+            animation: holoShift 4s ease-in-out infinite, logoFloat 5s ease-in-out infinite;
+            mix-blend-mode: overlay;
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @keyframes holoShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .logo-holo-overlay {
+            animation: holoShift 4s ease-in-out infinite;
+            /* Override float for this element since it uses translateX */
+        }
+
+        .company-full-name {
+            font-size: 12px; font-weight: 700;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1.2px; line-height: 1.4;
+        }
+
+        .company-acronym {
+            font-size: 34px; font-weight: 900;
+            color: #1D1D1B; letter-spacing: 6px;
+            line-height: 1.2; margin-top: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .company-acronym::after {
+            content: '';
+            display: block;
+            width: 40px; height: 2px;
+            background: linear-gradient(90deg, #B8183A, transparent);
+            margin: 4px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        .divider {
+            width: 80px; height: 1px;
+            background: linear-gradient(90deg, transparent, #B8183A, transparent);
+            margin: 10px auto;
+        }
+
+        .contact-section {
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .person-name {
+            font-size: 23px; font-weight: 700;
+            color: #B8183A; text-align: center; margin-bottom: 2px;
+        }
+
+        .person-title {
+            font-size: 12px; color: #666;
+            text-align: center; font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+        }
+
+        .contact-items {
+            display: flex; flex-direction: column;
+            gap: 6px; margin-bottom: 12px;
+        }
+
+        .contact-item {
+            background: rgba(245, 243, 243, 0.7);
+            padding: 10px 14px; border-radius: 12px;
+            display: flex; align-items: center; gap: 12px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 3px; height: 100%;
+            background: #B8183A;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .contact-item:hover {
+            background: rgba(184, 24, 58, 0.04);
+            transform: translateX(6px);
+            box-shadow: 0 4px 15px rgba(184, 24, 58, 0.08);
+        }
+
+        .contact-item:hover::before { opacity: 1; }
+
+        .contact-icon { font-size: 18px; min-width: 24px; text-align: center; }
+        .contact-info { flex: 1; }
+
+        .contact-label {
+            font-size: 9px; text-transform: uppercase;
+            color: #999; letter-spacing: 0.8px;
+            font-weight: 600; margin-bottom: 1px;
+        }
+
+        .contact-value { font-size: 13px; color: #444; font-weight: 600; }
+        .contact-item a { color: #444; text-decoration: none; transition: color 0.3s ease; }
+        .contact-item a:hover { color: #B8183A; }
+
+        .action-buttons {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; margin-top: 12px; margin-bottom: 16px;
+        }
+
+        .action-button {
+            padding: 12px; border: none; border-radius: 12px;
+            font-size: 12px; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
+            position: relative; overflow: hidden;
+        }
+
+        .action-button::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+            animation: btnShine 4s ease-in-out infinite;
+        }
+
+        @keyframes btnShine {
+            0%, 100% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .save-button {
+            background: linear-gradient(135deg, #B8183A, #8B1030);
+            color: white; box-shadow: 0 4px 20px rgba(184, 24, 58, 0.25);
+        }
+
+        .share-button {
+            background: linear-gradient(135deg, #1D1D1B, #333);
+            color: white; box-shadow: 0 4px 20px rgba(29, 29, 27, 0.25);
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(184, 24, 58, 0.35);
+        }
+
+        .accent-bar {
+            height: 6px;
+            border-radius: 0 0 22px 22px;
+            background: linear-gradient(90deg,
+                #B8183A 0%, #B8183A 35%,
+                #d4445a 35%, #d4445a 38%,
+                #1D1D1B 38%, #1D1D1B 100%
+            );
+            margin: 6px -28px 0 -28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accent-bar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: barShine 5s ease-in-out infinite;
+        }
+
+        @keyframes barShine {
+            0%, 100% { left: -100%; }
+            50% { left: 150%; }
+        }
+
+        .success-message {
+            position: fixed; top: 30px; left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: linear-gradient(135deg, #B8183A, #8B1030);
+            color: white; padding: 15px 30px; border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(184, 24, 58, 0.5);
+            font-weight: 700; opacity: 0; transition: all 0.5s ease; z-index: 1000;
+        }
+
+        .success-message.show {
+            transform: translateX(-50%) translateY(0); opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .contact-card { padding: 22px 22px 0 22px; }
+            .logo-container img { width: 135px; }
+            .logo-holo-overlay { width: 135px; }
+            .company-full-name { font-size: 11px; }
+            .company-acronym { font-size: 28px; }
+            .person-name { font-size: 21px; }
+            .accent-bar { margin-left: -22px; margin-right: -22px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .contact-card { padding: 20px 16px 0 16px; }
+            .logo-container img { width: 115px; }
+            .logo-holo-overlay { width: 115px; }
+            .company-full-name { font-size: 10px; }
+            .company-acronym { font-size: 24px; letter-spacing: 4px; }
+            .person-name { font-size: 19px; }
+            .contact-item { padding: 8px 10px; }
+            .contact-value { font-size: 12px; }
+            .accent-bar { margin-left: -16px; margin-right: -16px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="particles-canvas" id="particles"></canvas>
+
+    <div class="container">
+        <div class="contact-card">
+            <div class="logo-section">
+                <div class="logo-container">
+                    <img src="esci/logo-esci-transparent.png" alt="ESCI">
+                    <div class="logo-holo-overlay"></div>
+                </div>
+                <p class="company-full-name">Entreprise Sénégalaise de Construction et d'Industrie</p>
+                <p class="company-acronym">ESCI</p>
+                <div class="divider"></div>
+            </div>
+
+            <div class="contact-section">
+                <h2 class="person-name">Libasse MBENGUE</h2>
+                <p class="person-title">Directeur Général</p>
+
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-info">
+                            <div class="contact-label">Téléphone Mobile</div>
+                            <div class="contact-value">
+                                <a href="tel:+221776397928">+221 77 639 79 28</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">☎️</div>
+                        <div class="contact-info">
+                            <div class="contact-label">Téléphone Fixe</div>
+                            <div class="contact-value">
+                                <a href="tel:+221338310000">+221 33 831 00 00</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-info">
+                            <div class="contact-label">Email Professionnel</div>
+                            <div class="contact-value">
+                                <a href="mailto:libasse.esci@gmm.com">libasse.esci@gmm.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-info">
+                            <div class="contact-label">Email Personnel</div>
+                            <div class="contact-value">
+                                <a href="mailto:libassembengue@gmail.com">libassembengue@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-info">
+                            <div class="contact-label">Adresse</div>
+                            <div class="contact-value">
+                                <a href="https://www.google.com/maps/search/Km4,5+Boulevard+du+centenaire+Dakar+Sénégal" target="_blank">Km4,5 Boulevard du centenaire, Dakar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-button save-button" onclick="saveContact()">
+                        <span>💾</span>
+                        <span>Save</span>
+                    </button>
+                    <button class="action-button share-button" onclick="shareCard()">
+                        <span>🔗</span>
+                        <span>Share</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="accent-bar"></div>
+        </div>
+    </div>
+
+    <div class="success-message" id="successMessage"></div>
+
+    <script>
+        // === PARTICLES ===
+        (function() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const PARTICLE_COUNT = 80;
+            const LINE_DISTANCE = 160;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.radius = Math.random() * 3 + 1;
+                    this.opacity = Math.random() * 0.7 + 0.3;
+                    this.isRed = Math.random() > 0.5;
+                    this.pulse = Math.random() * Math.PI * 2;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.pulse += 0.02;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+                draw() {
+                    const pulseOpacity = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
+                    // Glow
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
+                    if (this.isRed) {
+                        ctx.fillStyle = `rgba(184, 24, 58, ${pulseOpacity * 0.15})`;
+                    } else {
+                        ctx.fillStyle = `rgba(200, 200, 220, ${pulseOpacity * 0.1})`;
+                    }
+                    ctx.fill();
+                    // Core
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    if (this.isRed) {
+                        ctx.fillStyle = `rgba(184, 24, 58, ${pulseOpacity})`;
+                    } else {
+                        ctx.fillStyle = `rgba(200, 200, 220, ${pulseOpacity * 0.8})`;
+                    }
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+            function drawLines() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < LINE_DISTANCE) {
+                            const alpha = 0.25 * (1 - dist / LINE_DISTANCE);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            if (particles[i].isRed || particles[j].isRed) {
+                                ctx.strokeStyle = `rgba(184, 24, 58, ${alpha})`;
+                            } else {
+                                ctx.strokeStyle = `rgba(200, 200, 220, ${alpha * 0.5})`;
+                            }
+                            ctx.lineWidth = 0.8;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                drawLines();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // === FUNCTIONS ===
+        function saveContact() {
+            const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Libasse MBENGUE
+ORG:ESCI - Entreprise Sénégalaise de Construction et d'Industrie
+TITLE:Directeur Général
+TEL;TYPE=CELL:+221776397928
+TEL;TYPE=WORK:+221338310000
+EMAIL;TYPE=INTERNET:libasse.esci@gmm.com
+EMAIL;TYPE=INTERNET:libassembengue@gmail.com
+ADR;TYPE=WORK:;;Km4,5 Boulevard du centenaire;Dakar;;;Sénégal
+NOTE:ESCI - Entreprise Sénégalaise de Construction et d'Industrie
+END:VCARD`;
+            const blob = new Blob([vcard], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Libasse-MBENGUE-ESCI.vcf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            showSuccess('✓ Contact téléchargé!');
+        }
+
+        function shareCard() {
+            const shareData = {
+                title: 'ESCI - Libasse MBENGUE',
+                text: 'Libasse MBENGUE - Directeur Général - Entreprise Sénégalaise de Construction et d\'Industrie',
+                url: window.location.href
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch(() => copyToClipboard());
+            } else { copyToClipboard(); }
+        }
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(() => showSuccess('✓ Lien copié!'));
+        }
+
+        function showSuccess(message) {
+            const el = document.getElementById('successMessage');
+            el.textContent = message;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
